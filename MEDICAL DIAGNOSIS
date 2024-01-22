@@ -1,41 +1,16 @@
-symptom(amit,fever).
-    symptom(amit,rash).
-    symptom(amit,headache).
-    symptom(amit,runny_nose).
+symptom(john, fever).
+symptom(john, cough).
+symptom(mary, headache).
+symptom(mary, fever).
+symptom(alice, sore_throat).
+symptom(alice, cough).
 
-    symptom(kaushal,chills).
-    symptom(kaushal,fever).
-    symptom(kaushal,hedache).
+disease(flue).
+disease(cold).
+disease(strep_throat).
 
-    symptom(dipen,runny_nose).
-    symptom(dipen,rash).
-    symptom(dipen,flu).
+has_symptoms(X, flue) :- symptom(X, fever), symptom(X, cough).
+has_symptoms(X, cold) :- symptom(X, headache), symptom(X, sore_throat), not(has_symptoms(X, flue)).
+has_symptoms(X, strep_throat) :- symptom(X, sore_throat), symptom(X, fever), not(has_symptoms(X, flue)).
 
-
-    hypothesis(Patient,measels):-
-        symptom(Patient,fever),
-        symptom(Patient,cough),
-        symptom(Patient,conjunctivitis),
-        symptom(Patient,rash),
-        write('Eat Salad').
-
-    hypothesis(Patient,german_measles) :-
-        symptom(Patient,fever),
-        symptom(Patient,headache),
-        symptom(Patient,runny_nose),
-        symptom(Patient,rash),
-        write('Avoid Oily Food').
-
-    hypothesis(Patient,flu) :-
-        symptom(Patient,fever),
-        symptom(Patient,headache),
-.        symptom(Patient,body_ache),
-        symptom(Patient,chills),
-        write('Avoid cold food').
-
-    hypothesis(Patient,common_cold) :-
-        symptom(Patient,headache),
-        symptom(Patient,sneezing),
-        symptom(Patient,sore_throat),
-        symptom(Patient,chills),
-        write('Take green vegetables').
+diagnose(X, Disease) :- has_symptoms(X, Disease), disease(Disease).
