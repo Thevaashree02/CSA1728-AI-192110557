@@ -1,24 +1,41 @@
-% Facts about foods and their properties
-food_properties(apple, low_calorie).
-food_properties(banana, moderate_calorie).
-food_properties(carrot, low_calorie).
-food_properties(spinach, low_calorie).
-food_properties(chicken_breast, high_protein).
-food_properties(salmon, high_protein).
-food_properties(oats, high_fiber).
-food_properties(yogurt, probiotics).
+symptom(amit,fever).
+    symptom(amit,rash).
+    symptom(amit,headache).
+    symptom(amit,runny_nose).
 
-% Rules to determine suitable diets for different diseases
-suitable_diet(heart_disease, [apple, salmon, spinach]).
-suitable_diet(diabetes, [apple, chicken_breast, spinach]).
-suitable_diet(ibs, [banana, carrot, oats, yogurt]).
+    symptom(kaushal,chills).
+    symptom(kaushal,fever).
+    symptom(kaushal,hedache).
 
-% Predicate to check if a food is suitable for a disease
-suitable_food(Food, Disease) :-
-    suitable_diet(Disease, Diet),
-    member(Food, Diet).
+    symptom(dipen,runny_nose).
+    symptom(dipen,rash).
+    symptom(dipen,flu).
 
-% Predicate to suggest a diet based on a disease
-suggest_diet(Disease) :-
-    suitable_diet(Disease, Diet),
-    write("Recommended diet for "), write(Disease), write(": "), write(Diet), nl.
+
+    hypothesis(Patient,measels):-
+        symptom(Patient,fever),
+        symptom(Patient,cough),
+        symptom(Patient,conjunctivitis),
+        symptom(Patient,rash),
+        write('Eat Salad').
+
+    hypothesis(Patient,german_measles) :-
+        symptom(Patient,fever),
+        symptom(Patient,headache),
+        symptom(Patient,runny_nose),
+        symptom(Patient,rash),
+        write('Avoid Oily Food').
+
+    hypothesis(Patient,flu) :-
+        symptom(Patient,fever),
+        symptom(Patient,headache),
+        symptom(Patient,body_ache),
+        symptom(Patient,chills),
+        write('Avoid cold food').
+
+    hypothesis(Patient,common_cold) :-
+        symptom(Patient,headache),
+        symptom(Patient,sneezing),
+        symptom(Patient,sore_throat),
+        symptom(Patient,chills),
+        write('Take green vegetables').
